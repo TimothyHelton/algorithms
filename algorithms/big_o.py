@@ -6,6 +6,8 @@
 .. moduleauthor:: Timothy Helton <timothy.j.helton@gmail.com>
 """
 
+import os.path as osp
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -20,7 +22,7 @@ n_factorial = sci_msc.factorial(n)
 
 big_o = pd.DataFrame(np.c_[n, log_n, n_log_n, n_squared, n_factorial],
                      columns=['O(n)', 'O(log n)', 'O(n log n)',
-                              'O(n^2)', 'O(n!)'])
+                              'O($n^2$)', 'O(n!)'])
 
 if __name__ == '__main__':
     fig, ax = plt.subplots(figsize=(10, 8), facecolor='white')
@@ -35,4 +37,4 @@ if __name__ == '__main__':
     plt.grid()
 
     plt.show()
-    # plt.savefig('big_o_models.png')
+    # plt.savefig(osp.join('..', 'big_o_models.png'))
