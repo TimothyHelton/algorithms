@@ -10,9 +10,6 @@ dist/*
 *.pyc
 *.so
 
-# Local preferences #
-workspace.xml
-
 # Logs and databases #
 *.log
 *.sql
@@ -49,6 +46,7 @@ strumenti/.idea/*
 
 # pytest files #
 .cache/*
+algorithms/tests/.cache/*
 strumenti/tests/.coverage
 
 # Sphinx files #
