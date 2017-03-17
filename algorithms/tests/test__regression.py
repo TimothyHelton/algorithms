@@ -61,4 +61,5 @@ def test__leastsquares_calc_y_intercept(kwargs, expected):
 # Test LeastSquares_plot_data()
 def test__leastsquares_plot_data():
     inst = regression.LeastSquares(x=np.arange(5), y=np.arange(5))
+    print(inst.check_values())
     inst.plot_data()

@@ -4,6 +4,8 @@
 
 ![alt text](big_o_models.png)
 
-## Search Algorithms
+## Regression Algorithms
+### Least Squares Linear Regression
 
+## Search Algorithms
 ### Binary Search

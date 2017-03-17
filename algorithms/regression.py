@@ -10,6 +10,7 @@ import os.path as osp
 
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy import stats
 import seaborn
 
 
@@ -26,13 +27,13 @@ class LeastSquares:
     - **y**: *ndarray* y values
     - **y_intercept**: *float* value where regression line intercepts y-axis
     """
-    def __init__(self, x, y):
+    def __init__(self, x: np.ndarray, y: np.ndarray):
         self.x = x
         self.y = y
         self.slope = None
         self.y_intercept = None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'LeastSquares(x={self.x}, y={self.y})'
 
     def calc_slope(self):
@@ -63,6 +64,14 @@ class LeastSquares:
         x_mean = np.mean(self.x)
         y_mean = np.mean(self.y)
         self.y_intercept = y_mean - self.slope * x_mean
+
+    def check_values(self) -> str:
+        """Use SciPy to check the regression coefficients."""
+        slope, intercept, r_value, p_value, std_err = stats.linregress(self.x,
+                                                                       self.y)
+        return ('\n\nCheck Values from SciPy\n\n'
+                f'Slope: {slope:.2}\n'
+                f'Intercept: {intercept:.2}')
 
     def plot_data(self, save_name=None, **kwargs):
         """Plot the data with regression line."""
