@@ -6,6 +6,8 @@
 .. moduleauthor:: Timothy Helton <timothy.j.helton@gmail.com>
 """
 
+from collections import namedtuple
+
 import numpy as np
 import pytest
 
@@ -45,6 +47,8 @@ calc_median = {'even': ({'data': np.arange(4)}, 1.5, np.arange(2),
                'small_odd': ({'data': np.arange(3)}, 1, 0, 2),
                'small_even': ({'data': np.arange(2)}, 0.5, 0, 1),
                'single': ({'data': np.arange(1)}, 0, None, None),
+               'unordered': ({'data': np.array([2, 0, 1, 4, 3])}, 2,
+                             np.arange(2), np.arange(3, 5, 1)),
                }
 
 
@@ -57,3 +61,20 @@ def test__general_calc_median(kwargs, median, low_array, high_array):
     assert inst.median == median
     assert np.all(np.equal(inst.median_low, low_array))
     assert np.all(np.equal(inst.median_high, high_array))
+
+
+# Test calc_quartiles()
+Quartiles = namedtuple('Quartiles', ('q1', 'q2', 'q3'))
+quartiles = {'odd': ({'data': np.arange(7)}, Quartiles(1, 3, 5), 4),
+             'even': ({'data': np.arange(6)}, Quartiles(1, 2.5, 4), 3),
+             }
+
+
+@pytest.mark.parametrize('kwargs, quartile_tuple, quartile_range',
+                         list(quartiles.values()),
+                         ids=list(quartiles.keys()))
+def test__calc_quartiles(kwargs, quartile_tuple, quartile_range):
+    inst = stats.General(**kwargs)
+    inst.calc_quartiles()
+    assert inst.quartiles == quartile_tuple
+    assert inst.quartile_range == quartile_range
