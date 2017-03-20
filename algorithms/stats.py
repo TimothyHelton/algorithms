@@ -33,7 +33,7 @@ class General:
         self.median_low = None
         self.median_high = None
         self.quartiles = None
-        self.quartile_range = None
+        self.inner_quartile_range = None
 
     def __repr__(self):
         return f'General(data={self.data})'
@@ -80,6 +80,6 @@ class General:
         q3 = self.median
 
         self.quartiles = Quartiles(q1, q2, q3)
-        self. quartile_range = q3 - q1
+        self.inner_quartile_range = q3 - q1
 
         self.data = original_data
